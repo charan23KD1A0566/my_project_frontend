@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - QR Attendance System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">📱 QR Attendance</div>
+                <button class="toggle-sidebar" id="toggleSidebar">☰</button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                    <span class="icon">📊</span>
+                    <span class="label">Dashboard</span>
+                </a>
+                <a href="#add-department" class="nav-link" data-section="add-department">
+                    <span class="icon">🏢</span>
+                    <span class="label">Add Department</span>
+                </a>
+                <a href="#add-section" class="nav-link" data-section="add-section">
+                    <span class="icon">📂</span>
+                    <span class="label">Add Section</span>
+                </a>
+                <a href="#add-year" class="nav-link" data-section="add-year">
+                    <span class="icon">📅</span>
+                    <span class="label">Add Year</span>
+                </a>
+                <a href="#add-subject" class="nav-link" data-section="add-subject">
+                    <span class="icon">📚</span>
+                    <span class="label">Add Subject</span>
+                </a>
+                <a href="#add-teacher" class="nav-link" data-section="add-teacher">
+                    <span class="icon">👨‍🏫</span>
+                    <span class="label">Add Teacher</span>
+                </a>
+                <a href="#add-student" class="nav-link" data-section="add-student">
+                    <span class="icon">👨‍🎓</span>
+                    <span class="label">Add Student</span>
+                </a>
+                <a href="#reports" class="nav-link" data-section="reports">
+                    <span class="icon">📈</span>
+                    <span class="label">Reports</span>
+                </a>
+                <a href="#settings" class="nav-link" data-section="settings">
+                    <span class="icon">⚙️</span>
+                    <span class="label">Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn-logout" id="logoutBtn">
+                    <span class="icon">🚪</span>
+                    <span class="label">Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="breadcrumb">
+                    <span id="pageName">Dashboard</span>
+                </div>
+                <div class="user-info">
+                    <span id="userName">Admin</span>
+                    <div class="avatar">👤</div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="dashboard-header">
+                    <h2>Dashboard Overview</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3>Total Users</h3>
+                            <p class="stat-number" id="totalUsers">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎓</div>
+                        <div class="stat-content">
+                            <h3>Total Classes</h3>
+                            <p class="stat-number" id="totalClasses">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <h3>Today's Attendance</h3>
+                            <p class="stat-number" id="todayAttendance">0%</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📱</div>
+                        <div class="stat-content">
+                            <h3>QR Scans Today</h3>
+                            <p class="stat-number" id="qrScans">0</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Department Section -->
+            <section id="add-department" class="content-section">
+                <div class="section-header">
+                    <h2>Add Department</h2>
+                </div>
+                <div class="form-container">
+                    <form id="departmentForm" class="admin-form">
+                        <div class="form-group">
+                            <label>Department Name *</label>
+                            <input type="text" id="deptName" placeholder="e.g., Science, Commerce" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Department Code *</label>
+                            <input type="text" id="deptCode" placeholder="e.g., SCI, COM" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="deptDesc" placeholder="Department description" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Department</button>
+                        <span class="form-message" id="deptMessage"></span>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Add Section Section -->
+            <section id="add-section" class="content-section">
+                <div class="section-header">
+                    <h2>Add Section</h2>
+                </div>
+                <div class="form-container">
+                    <form id="sectionForm" class="admin-form">
+                        <div class="form-group">
+                            <label>Section Name *</label>
+                            <input type="text" id="sectionName" placeholder="e.g., A, B, C" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Department *</label>
+                            <select id="sectionDept" required>
+                                <option value="">Select Department</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Year *</label>
+                            <select id="sectionYear" required>
+                                <option value="">Select Year</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Capacity</label>
+                            <input type="number" id="sectionCapacity" placeholder="e.g., 60" min="1">
+                        </div>
+                        <button type="submit" class="btn-primary">Add Section</button>
+                        <span class="form-message" id="sectionMessage"></span>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Add Year Section -->
+            <section id="add-year" class="content-section">
+                <div class="section-header">
+                    <h2>Add Year</h2>
+                </div>
+                <div class="form-container">
+                    <form id="yearForm" class="admin-form">
+                        <div class="form-group">
+                            <label>Year Name *</label>
+                            <input type="text" id="yearName" placeholder="e.g., First Year, 2024-25" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Year Code *</label>
+                            <input type="text" id="yearCode" placeholder="e.g., Y1, 2024-25" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Start Date *</label>
+                            <input type="date" id="yearStart" required>
+                        </div>
+                        <div class="form-group">
+                            <label>End Date *</label>
+                            <input type="date" id="yearEnd" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Year</button>
+                        <span class="form-message" id="yearMessage"></span>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Add Subject Section -->
+            <section id="add-subject" class="content-section">
+                <div class="section-header">
+                    <h2>Add Subject</h2>
+                </div>
+                <div class="form-container">
+                    <form id="subjectForm" class="admin-form">
+                        <div class="form-group">
+                            <label>Subject Name *</label>
+                            <input type="text" id="subjectName" placeholder="e.g., Mathematics, Physics" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject Code *</label>
+                            <input type="text" id="subjectCode" placeholder="e.g., MATH101" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Department *</label>
+                            <select id="subjectDept" required>
+                                <option value="">Select Department</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Credits</label>
+                            <input type="number" id="subjectCredits" placeholder="e.g., 4" min="1" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="subjectDesc" placeholder="Subject description" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Subject</button>
+                        <span class="form-message" id="subjectMessage"></span>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Add Teacher Section -->
+            <section id="add-teacher" class="content-section">
+                <div class="section-header">
+                    <h2>Add Teacher</h2>
+                </div>
+                <div class="form-container">
+                    <form id="teacherForm" class="admin-form">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="teacherName" placeholder="Enter teacher name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="teacherEmail" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="teacherPhone" placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group">
+                            <label>Department *</label>
+                            <select id="teacherDept" required>
+                                <option value="">Select Department</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Qualification *</label>
+                            <input type="text" id="teacherQual" placeholder="e.g., B.Sc, M.Sc" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Experience (Years)</label>
+                            <input type="number" id="teacherExp" placeholder="e.g., 5" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Password *</label>
+                            <input type="password" id="teacherPassword" placeholder="Enter password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Teacher</button>
+                        <span class="form-message" id="teacherMessage"></span>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Add Student Section -->
+            <section id="add-student" class="content-section">
+                <div class="section-header">
+                    <h2>Add Student</h2>
+                </div>
+                <div class="form-container">
+                    <form id="studentForm" class="admin-form">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" id="studentName" placeholder="Enter student name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="studentEmail" placeholder="Enter email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Roll Number *</label>
+                            <input type="text" id="studentRoll" placeholder="e.g., 001" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="studentPhone" placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group">
+                            <label>Department *</label>
+                            <select id="studentDept" required>
+                                <option value="">Select Department</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Year *</label>
+                            <select id="studentYear" required>
+                                <option value="">Select Year</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Section *</label>
+                            <select id="studentSection" required>
+                                <option value="">Select Section</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" id="studentDOB">
+                        </div>
+                        <div class="form-group">
+                            <label>Password *</label>
+                            <input type="password" id="studentPassword" placeholder="Enter password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Student</button>
+                        <span class="form-message" id="studentMessage"></span>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="content-section">
+                <div class="section-header">
+                    <h2>Attendance Reports</h2>
+                </div>
+
+                <div class="report-filters">
+                    <input type="date" id="reportStartDate" class="filter-input">
+                    <input type="date" id="reportEndDate" class="filter-input">
+                    <select id="reportClassFilter" class="filter-input">
+                        <option value="">All Classes</option>
+                    </select>
+                    <button class="btn-primary" id="generateReportBtn">Generate Report</button>
+                </div>
+
+                <div class="report-container">
+                    <div id="reportContent">Select filters and click Generate Report</div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                </div>
+
+                <div class="settings-container">
+                    <div class="setting-group">
+                        <h3>System Settings</h3>
+                        <div class="setting-item">
+                            <label>System Name</label>
+                            <input type="text" id="systemName" placeholder="QR Attendance System" class="setting-input">
+                        </div>
+                        <div class="setting-item">
+                            <label>Timezone</label>
+                            <select id="timezone" class="setting-input">
+                                <option value="UTC">UTC</option>
+                                <option value="EST">EST</option>
+                                <option value="CST">CST</option>
+                                <option value="IST">IST</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3>Notification Settings</h3>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="emailNotifications" checked>
+                                Enable Email Notifications
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="smsNotifications">
+                                Enable SMS Notifications
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" id="saveSettingsBtn">Save Settings</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Add User -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New User</h2>
+            <form id="userForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="userName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select id="userRole" required>
+                        <option value="admin">Admin</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="userPassword" required>
+                </div>
+                <button type="submit" class="btn-primary">Add User</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .student-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+            background-color: #f9fff9;
+        }
+        input.error {
+            border-color: #d32f2f;
+            background-color: #fff1f1;
+        }
+        .error-text {
+            color: #d32f2f;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        .error-text.show {
+            display: block;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+        .btn:hover:not(:disabled) {
+            background-color: #45a049;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.5);
+            transform: translateY(-2px);
+        }
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+        .error, .success, .warning {
+            padding: 16px 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error {
+            background-color: #ffebee;
+            color: #b71c1c;
+            border-left-color: #d32f2f;
+        }
+        .error.active {
+            display: block;
+        }
+        .success {
+            background-color: #e8f5e9;
+            color: #1b5e20;
+            border-left-color: #4caf50;
+        }
+        .success.active {
+            display: block;
+        }
+        .warning {
+            background-color: #fff3e0;
+            color: #e65100;
+            border-left-color: #ff9800;
+        }
+        .warning.active {
+            display: block;
+        }
+        .attendance-section {
+            margin-top: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .low-attendance {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="student-container">
+        <h1>Student Dashboard</h1>
+        <div id="errorMsg" class="error"></div>
+        <div id="successMsg" class="success"></div>
+        <div id="warningMsg" class="warning"></div>
+        <form id="attendanceForm">
+            <div class="form-group">
+                <label for="sessionId">Session ID *</label>
+                <input type="text" id="sessionId" required placeholder="Paste Session ID from QR">
+                <div class="error-text"></div>
+            </div>
+            <div class="form-group">
+                <label for="token">Token *</label>
+                <input type="text" id="token" required placeholder="Paste Token from QR">
+                <div class="error-text"></div>
+            </div>
+            <button type="submit" class="btn" id="markBtn">Mark Attendance</button>
+        </form>
+        <div class="attendance-section">
+            <h2>My Attendance</h2>
+            <div id="attendanceTableContainer">
+                <table id="attendanceTable">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="4">Loading...</td></tr>
+                    </tbody>
+                </table>
+                <div id="attendancePercent"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/student.js"></script>
+</body>
+</html>
