@@ -185,7 +185,13 @@ function populateYearDropdowns() {
             select.innerHTML = '<option value="">Select Year</option>';
             yearsList.forEach(year => {
                 const option = document.createElement('option');
- 
+                option.value = year.id;
+                option.textContent = year.name;
+                select.appendChild(option);
+            });
+        }
+    });
+}
 
 // Load Student Sections based on Year and Department
 function loadStudentSections() {
@@ -209,12 +215,6 @@ function loadStudentSections() {
         option.value = section.id;
         option.textContent = section.name;
         sectionSelect.appendChild(option);
-    });
-}               option.value = year.id;
-                option.textContent = year.name;
-                select.appendChild(option);
-            });
-        }
     });
 }
 
