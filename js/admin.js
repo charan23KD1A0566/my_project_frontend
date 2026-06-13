@@ -1,5 +1,5 @@
 // Admin Dashboard JS
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = 'https://qr-attendance-app-qx5k.onrender.com/api';
 
 // Store auth data
 let authToken = localStorage.getItem('token');

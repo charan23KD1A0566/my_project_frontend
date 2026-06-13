@@ -10,7 +10,7 @@ const formError = document.getElementById('formError');
 const rememberMe = document.getElementById('rememberMe');
 
 // API Configuration
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = 'https://qr-attendance-app-qx5k.onrender.com/api';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
