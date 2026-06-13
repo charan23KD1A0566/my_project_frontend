@@ -1,5 +1,5 @@
 // Student Dashboard JS - Attendance Marking & Tracking
-const API_BASE_URL = 'https://my-project-80ir.onrender.com/api';
+const API_BASE_URL = 'https://qr-attendance-app-qx5k.onrender.com/api';
 
 // State
 let studentId = localStorage.getItem('userId') || 'student';

@@ -1,5 +1,5 @@
 // Teacher Dashboard JS - QR Attendance Session Generator
-const API_BASE_URL = 'https://my-project-80ir.onrender.com/api';
+const API_BASE_URL = 'https://qr-attendance-app-qx5k.onrender.com/api';
 
 // State
 let countdownInterval = null;
