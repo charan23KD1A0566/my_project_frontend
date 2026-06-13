@@ -10,7 +10,7 @@ const formError = document.getElementById('formError');
 const rememberMe = document.getElementById('rememberMe');
 
 // API Configuration
-const API_BASE_URL = 'https://qr-attendance-app-qx5k.onrender.com/api';
+const API_BASE_URL = 'http://localhost:8080/api';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -185,6 +185,6 @@ function redirectToRole(role) {
         'student': 'student-dashboard.html'
     };
 
-    const redirectUrl = dashboardMap[role] || 'login.html';
+    const redirectUrl = dashboardMap[role.toLowerCase()] || 'login.html';
     window.location.href = redirectUrl;
 }
