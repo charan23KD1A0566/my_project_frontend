@@ -24,7 +24,7 @@ const pageNameDisplay = document.getElementById('pageName');
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     // Check authentication
-    if (!authToken || authRole !== 'admin') {
+    if (!authToken || (authRole && authRole.toLowerCase()) !== 'admin') {
         window.location.href = 'login.html';
         return;
     }
